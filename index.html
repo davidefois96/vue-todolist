@@ -30,10 +30,10 @@
 
     <div class="new-task">
 
-      <input v-model="newTask"  placeholder="Nuovo task"type="text" @keyup.enter="(newTask.length>=4)?createTask():newTask=''">
-      <button @click="(newTask.length>=4)?createTask():newTask=''" >Aggiungi</button>
-      <p v-show="(newTask.length<4)?errorMsg='aggiungi più di 4 caratteri':''" class="error">{{errorMsg}}</p>
-      <p class="error">{{errorMsgSecond}}</p>
+      <input v-model="newTask"  placeholder="Nuovo task" type="text" @keyup.enter="createTask()">
+      <button @click="createTask()" >Aggiungi</button>
+      <p class="error">{{errorMsg}}</p>
+      
       
       
     </div>
@@ -41,8 +41,8 @@
     <div class="task-container">
       <ul v-if="todolist.length>0">
         <li v-for="(task,index) in todolist">
-          <span @click.stop="isDone(task)" :class="{'done' : !task.done}">{{task.text}}"  </span>
-          <i class="fa-solid fa-trash-can" @click="(!task.done)?todolist.splice(index,1): errorMsgSecond='devi prima aver barrato l\' azione'" @mouseleave="errorMsgSecond=''"></i>
+          <span @click="toggletask(task)" :class="{'done' : !task.done}">{{task.text}}"  </span>
+          <i class="fa-solid fa-trash-can" @click.stop="deltask(task,index)" ></i>
         </li>
 
         

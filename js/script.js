@@ -38,8 +38,6 @@ createApp ({
 
       errorMsg:'',
 
-      errorMsgSecond:'',
-
       
     }
 
@@ -49,27 +47,61 @@ createApp ({
 
     createTask(){
 
-      task = {
+      if (this.newTask.length>4) {
 
-        text: this.newTask ,
-        done: 'false'
+        task = {
+
+          text: this.newTask ,
+          done: 'false'
+  
+  
+        }
+  
+        this.todolist.push(task);
+  
+        this.newTask='';
+        this.errorMsg='';
+        
+      }else{
+
+        this.errorMsg='aggiungi almeno 5 caratteri'
 
 
       }
 
-      this.todolist.push(task);
-
-      this.newTask='';
+     
 
     
     },
 
-    isDone(task){
+    deltask(task,index){
 
-      task.done=!task.done
+      this.errorMsg='';
+      
 
+      if (!task.done) {
+
+        this.todolist.splice(index,1)
+        
+      } else {
+
+        this.errorMsg='devi prima aver barrato l\' azione'
+
+        
+      }
+      
+      
+
+    },
+
+    toggletask(task){
+
+      task.done=!task.done;
+      this.errorMsg=''
 
     }
+
+    
 
 
   }
